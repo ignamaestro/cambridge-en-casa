@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cambridge en casa · Colegio Santa María</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --jungle:#1F4E79; --jungle-2:#2F6DB0; --banana:#FFC93C; --sky:#4A90D9;
+  --paper:#F4F7FB; --card:#FFFFFF; --ink:#1D2430; --muted:#5B6470; --line:#DBE4EE;
+  --tint-s:#FFF3CC; --tint-m:#E3EEF9; --on-accent:#1D2430; --hero-ink:#FFFFFF; --coral:#D65A4A;
+  color-scheme: light;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --jungle:#14304D; --jungle-2:#2F6DB0; --banana:#FFC93C; --sky:#5B9BE0;
+    --paper:#0F1722; --card:#172232; --ink:#E8EEF5; --muted:#A6B3C2; --line:#26354A;
+    --tint-s:#3A3215; --tint-m:#1C2E40; --on-accent:#1D2430; --hero-ink:#FFFFFF; --coral:#E07466;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"]{
+  --jungle:#14304D; --jungle-2:#2F6DB0; --banana:#FFC93C; --sky:#5B9BE0;
+  --paper:#0F1722; --card:#172232; --ink:#E8EEF5; --muted:#A6B3C2; --line:#26354A;
+  --tint-s:#3A3215; --tint-m:#1C2E40; --on-accent:#1D2430; --hero-ink:#FFFFFF; --coral:#E07466;
+  color-scheme: dark;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 72px)}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:17px;line-height:1.6}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--jungle)}
+h1,h2,h3{font-family:"Baloo 2","Trebuchet MS",system-ui,sans-serif;line-height:1.15;margin:0}
+h2{font-size:clamp(1.7rem,4.5vw,2.3rem);font-weight:800}
+h3{font-size:1.25rem;font-weight:700}
+p{margin:0 0 .9em}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--banana);outline-offset:3px;border-radius:6px}
+.wrap{max-width:980px;margin:0 auto;padding:0 20px}
+.prose{max-width:66ch}
+
+/* Top bar */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--jungle);color:var(--hero-ink)}
+.bar .wrap{display:flex;align-items:center;gap:14px;min-height:60px;flex-wrap:wrap;padding-top:8px;padding-bottom:8px}
+.brand{font-family:"Baloo 2",sans-serif;font-weight:700;font-size:1.1rem;margin-right:auto;text-decoration:none}
+.switch{display:inline-flex;background:rgba(255,255,255,.12);border-radius:999px;padding:4px}
+.switch button{font:inherit;font-family:"Baloo 2",sans-serif;font-weight:700;font-size:1rem;border:0;background:transparent;color:var(--hero-ink);padding:6px 16px;border-radius:999px;cursor:pointer}
+.switch button[aria-pressed="true"]{background:var(--banana);color:var(--on-accent)}
+body[data-level="movers"] .switch button[aria-pressed="true"]{background:var(--sky);color:#fff}
+
+/* Hero */
+.hero{background:linear-gradient(160deg,var(--jungle-2) 0%,var(--jungle) 70%);color:var(--hero-ink);padding:40px 0 64px;overflow:hidden}
+.hero h1{font-size:clamp(2.6rem,9vw,4.6rem);font-weight:800;letter-spacing:-.01em}
+.hero .lead{font-size:1.15rem;max-width:52ch;margin-top:14px;opacity:.92}
+.shields{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:34px;max-width:620px}
+.shield{position:relative;aspect-ratio:5/6;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:10% 8% 18%;color:var(--on-accent)}
+.shield svg{position:absolute;inset:0;width:100%;height:100%}
+.shield svg path{fill:var(--banana);stroke:rgba(255,255,255,.85);stroke-width:3;vector-effect:non-scaling-stroke}
+body[data-level="movers"] .shield svg path{fill:var(--sky)}
+body[data-level="movers"] .shield{color:#fff}
+.shield > *{position:relative}
+.shield .skill{font-family:"Baloo 2",sans-serif;font-weight:700;font-size:clamp(.95rem,2.6vw,1.2rem);line-height:1.1}
+.shield .time{font-family:"Baloo 2",sans-serif;font-weight:800;font-size:clamp(1.5rem,5vw,2.3rem);line-height:1;margin-top:6px}
+.shield .meta{font-size:.82rem;margin-top:4px}
+.hero .note{margin-top:22px;font-size:.98rem;max-width:56ch;opacity:.9}
+.hero .wrap{position:relative}
+.hero-monkey{position:absolute;right:0;bottom:-30px;width:min(34%,340px);height:auto;pointer-events:none;filter:drop-shadow(0 18px 30px rgba(0,0,0,.35));animation:monkeybob 3.2s ease-in-out infinite;transform-origin:50% 100%}
+@keyframes monkeybob{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-10px) rotate(2deg)}}
+@media (prefers-reduced-motion: reduce){.hero-monkey{animation:none}}
+@media (max-width:760px){.hero-monkey{display:none}}
+
+/* Sections */
+section.block{padding:56px 0}
+section.block + section.block{border-top:1px solid var(--line)}
+.kicker{color:var(--muted);font-size:1rem;margin:8px 0 22px;max-width:60ch}
+body:not([data-level="starters"]) [data-show="starters"],
+body:not([data-level="movers"]) [data-show="movers"]{display:none !important}
+
+/* Exam parts */
+.papers{display:grid;gap:14px}
+details.paper{background:var(--card);border:1px solid var(--line);border-radius:16px}
+details.paper summary{cursor:pointer;list-style:none;padding:16px 20px;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+details.paper summary::-webkit-details-marker{display:none}
+details.paper summary h3{margin-right:auto}
+details.paper summary .tag{color:var(--muted);font-size:.95rem}
+details.paper summary::after{content:"+";font-family:"Baloo 2",sans-serif;font-weight:800;font-size:1.5rem;line-height:1}
+details.paper[open] summary::after{content:"–"}
+.parts{list-style:none;margin:0;padding:0 20px 18px;counter-reset:p}
+.parts li{counter-increment:p;display:grid;grid-template-columns:2.2rem 1fr;gap:10px;padding:10px 0;border-top:1px dashed var(--line)}
+.parts li::before{content:counter(p);font-family:"Baloo 2",sans-serif;font-weight:800;font-size:1.05rem;width:2rem;height:2rem;border-radius:50%;display:grid;place-items:center;background:var(--tint-s)}
+body[data-level="movers"] .parts li::before{background:var(--tint-m)}
+.parts b{display:block}
+.parts span{color:var(--muted);font-size:.96rem}
+
+/* Resources */
+.res-group{margin-top:26px}
+.res-group h3{margin-bottom:10px}
+.res{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.item{display:flex;flex-direction:column;gap:6px;background:var(--card);border:1px solid var(--line);border-left:6px solid var(--banana);border-radius:12px;padding:14px 16px;text-decoration:none}
+body[data-level="movers"] .item{border-left-color:var(--sky)}
+a.item:hover{border-color:var(--jungle-2)}
+.item.soon .go{color:var(--coral)}
+.item strong{font-family:"Baloo 2",sans-serif;font-size:1.12rem;line-height:1.2}
+.item small{color:var(--muted);font-size:.93rem}
+.item .go{font-weight:700;font-size:.93rem;text-decoration:underline;text-underline-offset:3px;margin-top:auto}
+.item.soon{border-left-color:var(--line);opacity:.8}
+.item.soon .go{text-decoration:none;color:var(--muted)}
+
+/* Weekly words */
+.mlvid{display:block;width:100%;max-width:360px;aspect-ratio:9/16;margin:6px auto 4px;border-radius:16px;background:#000;box-shadow:0 12px 30px rgba(0,0,0,.18)}
+.week{background:var(--card);border:1px solid var(--line);border-top:8px solid var(--banana);border-radius:16px;padding:20px 22px}
+.wgrid{display:grid;grid-template-columns:1fr 1fr;gap:6px 22px;margin:14px 0 6px;padding:0;list-style:none}
+.wgrid li{padding:7px 0;border-bottom:1px dashed var(--line);font-size:1rem}
+.wgrid b{font-family:"Baloo 2",sans-serif;font-size:1.08rem}
+.wgrid span{color:var(--muted)}
+.week .test{background:var(--tint-s);border-radius:12px;padding:12px 16px;margin-top:14px;font-size:.98rem}
+body[data-level="movers"] .week{border-top-color:var(--sky)}
+body[data-level="movers"] .week .test{background:var(--tint-m)}
+@media (max-width:520px){.wgrid{grid-template-columns:1fr}}
+
+/* School material */
+.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 22px;max-width:70ch}
+
+/* Tips */
+.tips{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.tip{display:grid;grid-template-columns:46px 1fr;column-gap:16px;row-gap:4px;align-content:start;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px}
+.tip::before{grid-row:1 / span 2;width:46px;height:46px;border-radius:12px;background:var(--tint-s);display:grid;place-items:center;font-size:1.4rem;line-height:1}
+body[data-level="movers"] .tip::before{background:var(--tint-m)}
+.tip:nth-child(1)::before{content:"⏱️"}
+.tip:nth-child(2)::before{content:"🐒"}
+.tip:nth-child(3)::before{content:"✏️"}
+.tip:nth-child(4)::before{content:"💬"}
+.tip h3{font-size:1.1rem;margin:0;align-self:center;min-height:46px;display:flex;align-items:center}
+.tip p{color:var(--muted);margin:0}
+@media (max-width:640px){.tips{grid-template-columns:1fr}}
+
+/* Routine */
+.routine{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
+.day{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.day .d{font-family:"Baloo 2",sans-serif;font-weight:800;font-size:1.05rem;display:flex;align-items:center;gap:8px}
+.day .d i{font-style:normal;font-size:1.3rem}
+.day p{margin:.3em 0 0;color:var(--muted);font-size:.95rem}
+/* Phrases */
+.phr{list-style:none;padding:0;margin:0;display:grid;gap:10px;max-width:70ch}
+.phr li{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-left:6px solid var(--banana);border-radius:12px;padding:10px 14px}
+body[data-level="movers"] .phr li{border-left-color:var(--sky)}
+.phr .en{font-family:"Baloo 2",sans-serif;font-weight:700;font-size:1.1rem;line-height:1.25}
+.phr .q{display:block;font-size:.85rem;color:var(--muted);font-style:italic;margin-bottom:2px}
+.phr .es{display:block;color:var(--muted);font-size:.93rem}
+.say{flex:none;width:44px;height:44px;border-radius:50%;border:0;background:var(--jungle);color:#fff;font-size:1.15rem;cursor:pointer}
+.say:hover{background:var(--jungle-2)}
+.phr-group{margin-top:22px}
+.phr-group h3{margin-bottom:10px}
+
+/* Sample carousel */
+.papers > *{min-width:0}
+.sample{padding:4px 20px 18px;min-width:0}
+.sample h4{font-family:"Baloo 2",sans-serif;font-size:1.05rem;margin:4px 0 8px}
+.car{display:flex;align-items:flex-start;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 2px 12px;-webkit-overflow-scrolling:touch}
+.car figure{flex:0 0 min(78%,320px);margin:0;scroll-snap-align:start;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.car figure.wide{flex-basis:min(92%,460px)}
+.car a{display:block}
+.car img{display:block;width:100%;height:auto}
+.car figcaption{font-size:.9rem;padding:8px 12px;color:var(--ink);background:var(--card);border-top:1px solid var(--line)}
+.sample .hint{font-size:.85rem;color:var(--muted);margin:0}
+.sample .hint a{font-weight:700}
+
+/* Links */
+.links{list-style:none;padding:0;margin:0;max-width:70ch}
+.links li{padding:12px 0;border-top:1px solid var(--line)}
+.links a{font-weight:700;text-underline-offset:3px}
+.links span{display:block;color:var(--muted);font-size:.95rem}
+
+/* FAQ */
+.faq details{border-top:1px solid var(--line);max-width:70ch}
+.faq summary{cursor:pointer;padding:14px 0;font-weight:700;font-size:1.05rem}
+.faq details p{color:var(--muted)}
+
+footer{background:var(--jungle);color:var(--hero-ink);padding:36px 0 44px}
+footer p{max-width:60ch;margin:0 0 .6em}
+
+@media (max-width:520px){
+  body{font-size:16px}
+  .shields{gap:8px}
+  .shield .meta{font-size:.72rem}
+  .bar .brand{font-size:1rem}
+}
+</style>
+</head>
+<body data-level="starters">
+
+<header class="bar">
+  <div class="wrap">
+    <a class="brand" href="#inicio">Cambridge en casa</a>
+    <div class="switch" role="group" aria-label="Elige el nivel de tu hijo o hija">
+      <button type="button" data-level="starters" aria-pressed="true">Starters</button>
+      <button type="button" data-level="movers" aria-pressed="false">Movers</button>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="hero" id="inicio">
+  <div class="wrap">
+    <img class="hero-monkey" src="monkey.png" alt="" width="560" height="566">
+    <h1 data-show="starters">Pre A1 Starters</h1>
+    <h1 data-show="movers">A1 Movers</h1>
+    <p class="lead">El espacio para las familias de Cambridge del Colegio Santa María: cómo es la prueba, qué material tenéis y cómo acompañar en casa.</p>
+
+    <div class="shields" id="shields" aria-label="Las tres pruebas del examen"></div>
+
+    <p class="note">En Cambridge no se aprueba ni se suspende. Cada prueba se califica con hasta cinco escudos, y todos los niños y niñas reciben su certificado.</p>
+  </div>
+</section>
+
+<section class="block" id="examen">
+  <div class="wrap">
+    <h2>Cómo es el examen</h2>
+    <p class="kicker">Tres pruebas, y en todas empiezan con un ejemplo resuelto. Pulsa cada una para ver sus partes.</p>
+    <div class="papers" id="papers"></div>
+  </div>
+</section>
+
+<section class="block" id="repaso" data-show="starters">
+  <div class="wrap">
+    <h2>Palabras a repasar</h2>
+    <p class="kicker">Las palabras marcadas en la Monkey List que tienen que llevar al día. Esta vez son las 20 primeras después de los colores.</p>
+    <div class="week">
+      <video class="mlvid" controls playsinline preload="metadata" poster="monkey-list-starters.jpg" src="monkey-list-starters.mp4"></video>
+      <p class="test"><strong>Así es el test:</strong> dicto 12 de estas palabras en inglés, con audio nativo, despacio y tres veces. A la izquierda las escriben en inglés y a la derecha en español.</p>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="repaso-movers" data-show="movers">
+  <div class="wrap">
+    <h2>Palabras a repasar</h2>
+    <p class="kicker">Las palabras marcadas en la Monkey List que tienen que llevar al día. Empezamos por el primer tema: <strong>1. Wild animals!</strong></p>
+    <div class="week">
+      <video class="mlvid" controls playsinline preload="metadata" poster="monkey-list-movers.jpg" src="monkey-list-movers.mp4"></video>
+      <p class="test"><strong>Así es el test:</strong> dicto 12 de estas palabras en inglés, con audio nativo, despacio y tres veces. A la izquierda las escriben en inglés y a la derecha en español.</p>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="practico">
+  <div class="wrap">
+    <h2>Lo práctico</h2>
+    <p class="kicker">Fecha, inscripción y resultados, de un vistazo.</p>
+    <div class="res">
+      <div class="item"><strong>📅 Fecha del examen</strong><small>Todavía no está confirmada. Os la comunicaré en cuanto la sepamos.</small></div>
+      <div class="item"><strong>✅ Inscripción</strong><small>Ya está hecha. No tenéis que hacer nada más.</small></div>
+      <div class="item" style="border-left-color:var(--coral)"><strong>🔑 Resultados</strong><small>Los consultaréis en la web de Cambridge con un usuario y una contraseña que os daremos más adelante. <b style="color:var(--ink)">Guardadlos bien: ¡no los perdáis!</b></small></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="colegio">
+  <div class="wrap">
+    <h2>Material del colegio</h2>
+    <p class="kicker">Lo que recibe vuestro hijo o hija desde el centro.</p>
+    <div class="panel prose">
+      <p><strong>Libro de preparación: <span data-show="starters"><em>Fun for Starters</em></span><span data-show="movers"><em>Fun for Movers</em></span>.</strong> El colegio hace el pedido de los libros y se entregarán al alumnado en cuanto lleguen. Mientras tanto, seguimos trabajando con normalidad en la sesión semanal.</p>
+      <p style="margin:0"><strong>Sesión de preparación.</strong> Una vez por semana, en horario escolar.</p>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="materiales">
+  <div class="wrap">
+    <h2>Mis materiales</h2>
+    <p class="kicker">Recursos que he preparado para practicar en casa. Funcionan en el móvil, la tablet o el ordenador.</p>
+
+    <div class="res-group">
+      <h3>Vocabulario</h3>
+      <div class="res">
+        <a class="item" data-show="starters" href="https://tinyurl.com/monkeylist-starters" target="_blank" rel="noopener">
+          <strong>Starters Monkey List</strong>
+          <small>Todo el vocabulario oficial de Starters con su traducción, por temas y con audio.</small>
+          <span class="go">Abrir la web</span>
+        </a>
+        <a class="item" data-show="starters" href="monkey-list-starters.pdf" target="_blank" rel="noopener">
+          <strong>Monkey List en PDF</strong>
+          <small>La misma lista para imprimir y marcar las palabras que vamos trabajando.</small>
+          <span class="go">Abrir el PDF</span>
+        </a>
+        <a class="item" data-show="movers" href="https://claude.ai/artifact/LqBLg6gAbXMCHD334DGuwb" target="_blank" rel="noopener">
+          <strong>Movers Monkey List</strong>
+          <small>El vocabulario nuevo de Movers con su traducción, por temas.</small>
+          <span class="go">Abrir la web</span>
+        </a>
+        <a class="item" data-show="movers" href="monkey-list-movers.pdf" target="_blank" rel="noopener">
+          <strong>Monkey List en PDF</strong>
+          <small>Las casi 400 palabras de Movers para imprimir y marcar las que vamos trabajando.</small>
+          <span class="go">Abrir el PDF</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="res-group" data-show="movers">
+      <h3>Speaking</h3>
+      <div class="res">
+        <div class="item soon" data-show="movers">
+          <strong>Guía de Speaking</strong>
+          <small>Las cuatro partes de la prueba oral con expresiones para sorprender al examinador: however, while, whereas…</small>
+          <span class="go">Muy pronto</span>
+        </div>
+        <div class="item soon" data-show="movers">
+          <strong>Preguntas personales</strong>
+          <small>Banco de preguntas de la parte 4 (familia, colegio, aficiones, amigos, fin de semana) con respuestas modelo.</small>
+          <span class="go">Muy pronto</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="res-group">
+      <h3>Así es un Speaking real</h3>
+      <div class="res">
+        <a class="item" data-show="movers" href="https://youtu.be/qRL6B4ch0l8" target="_blank" rel="noopener">
+          <strong>Giorgia hace el Speaking de Movers</strong>
+          <small>Vídeo oficial de Cambridge con la prueba oral completa. Vedlo juntos antes del examen: así sabrá exactamente qué le espera.</small>
+          <span class="go">Ver el vídeo</span>
+        </a>
+        <a class="item" data-show="starters" href="https://youtu.be/1EJ0047E3vk" target="_blank" rel="noopener">
+          <strong>Paolo hace el Speaking de Starters</strong>
+          <small>Vídeo oficial de Cambridge con la prueba oral completa. Vedlo juntos antes del examen: así sabrá exactamente qué le espera.</small>
+          <span class="go">Ver el vídeo</span>
+        </a>
+        <a class="item" data-show="starters" href="https://www.cambridgeenglish.org/Images/502609-paolo-pre-a1-starters.pdf" target="_blank" rel="noopener">
+          <strong>Qué valora el examinador</strong>
+          <small>Comentarios oficiales de Cambridge sobre el Speaking de Paolo, parte por parte (PDF en inglés).</small>
+          <span class="go">Abrir el PDF</span>
+        </a>
+        <a class="item" data-show="movers" href="https://www.cambridgeenglish.org/Images/502606-giorgia-a1-movers.pdf" target="_blank" rel="noopener">
+          <strong>Qué valora el examinador</strong>
+          <small>Comentarios oficiales de Cambridge sobre el Speaking de Giorgia, parte por parte (PDF en inglés).</small>
+          <span class="go">Abrir el PDF</span>
+        </a>
+        <a class="item" data-show="starters" href="https://www.cambridgeenglish.org/exams-and-tests/qualifications/young-learners/paper/starters/preparation" target="_blank" rel="noopener">
+          <strong>Más vídeos de Speaking</strong>
+          <small>En la página de preparación de Cambridge hay otros dos niños, Tommaso y Rebecca, haciendo la prueba completa.</small>
+          <span class="go">Ver los vídeos</span>
+        </a>
+        <a class="item" data-show="movers" href="https://www.cambridgeenglish.org/exams-and-tests/qualifications/young-learners/paper/movers/preparation" target="_blank" rel="noopener">
+          <strong>Más vídeos de Speaking</strong>
+          <small>En la página de preparación de Cambridge hay más niños haciendo la prueba completa, con los comentarios del examinador.</small>
+          <span class="go">Ver los vídeos</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="res-group">
+      <h3>Juegos</h3>
+      <div class="res">
+        <a class="item" data-show="starters" href="https://wordwall.net/es/resource/123820208?wwmethod=link" target="_blank" rel="noopener">
+          <strong>Anagrama · Palabras a repasar</strong>
+          <small>Ordenar las letras de las 20 palabras marcadas de la Monkey List. Perfecto para practicar la ortografía del test.</small>
+          <span class="go">Jugar en Wordwall</span>
+        </a>
+        <a class="item" data-show="movers" href="https://wordwall.net/es/resource/123820540?wwmethod=link" target="_blank" rel="noopener">
+          <strong>Anagrama · Wild animals</strong>
+          <small>Ordenar las letras de las 16 palabras del primer tema de la Monkey List. Perfecto para practicar la ortografía del test.</small>
+          <span class="go">Jugar en Wordwall</span>
+        </a>
+        <a class="item" data-show="starters" href="https://wordwall.net/es/resource/123820833?wwmethod=link" target="_blank" rel="noopener">
+          <strong>Dictado · Palabras a repasar</strong>
+          <small>Escuchan cada palabra en inglés, despacio, y la escriben. Como el test de clase, pero en casa.</small>
+          <span class="go">Jugar en Wordwall</span>
+        </a>
+        <a class="item" data-show="movers" href="https://wordwall.net/es/resource/123821009?wwmethod=link" target="_blank" rel="noopener">
+          <strong>Dictado · Wild animals</strong>
+          <small>Escuchan cada palabra en inglés, despacio, y la escriben. Como el test de clase, pero en casa.</small>
+          <span class="go">Jugar en Wordwall</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="en-casa">
+  <div class="wrap">
+    <h2>Cómo acompañar en casa</h2>
+    <p class="kicker">No hace falta saber inglés para ayudar. Lo que más cuenta es la constancia y que lo vivan como un juego.</p>
+    <div class="tips">
+      <div class="tip">
+        <h3>Poco y a menudo</h3>
+        <p>Diez minutos casi cada día rinden más que una hora el fin de semana.</p>
+      </div>
+      <div class="tip">
+        <h3>Las palabras marcadas, al día</h3>
+        <p>En clase vamos marcando palabras de la Monkey List. Repasadlas en casa: en los tests de vocabulario dicto 12 de ellas en inglés y las escriben en inglés y en español.</p>
+      </div>
+      <div class="tip">
+        <h3>Ojo con la ortografía</h3>
+        <p>En Reading and Writing las respuestas solo cuentan si están bien escritas. Copiar y deletrear en voz alta ayuda mucho.</p>
+      </div>
+      <div class="tip">
+        <h3>Que hablen, aunque fallen</h3>
+        <p>En el Speaking se valora que respondan y añadan algo más. Mejor «I've got a dog. He's very funny» que solo «Yes».</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="rutina">
+  <div class="wrap">
+    <h2>Rutina de 10 minutos</h2>
+    <p class="kicker">Una idea sencilla para cada día que facilita la práctica en casa: poco tiempo, sin preparación y con los recursos del portal a mano.</p>
+    <div class="routine">
+      <div class="day"><div class="d"><i>🐒</i>Lunes</div><p>Repasad en la Monkey List las palabras marcadas: escuchad el audio y repetidlas en voz alta.</p></div>
+      <div class="day"><div class="d"><i>🎮</i>Martes</div><p>Un juego de vocabulario de «Mis materiales». Mejor si os enseña cómo se juega.</p></div>
+      <div class="day"><div class="d"><i>✏️</i>Miércoles</div><p>Ortografía: deletrea cinco palabras en voz alta y luego las escribe. Comprobad juntos con la lista.</p></div>
+      <div class="day" data-show="starters"><div class="d"><i>💬</i>Jueves</div><p>Speaking: pregunta «What's your name?», «How old are you?» o «What's your favourite colour?» y que responda con una frase completa.</p></div>
+      <div class="day" data-show="movers"><div class="d"><i>💬</i>Jueves</div><p>Speaking: buscad dos dibujos parecidos (o un cuento) y que diga las diferencias o cuente la historia en inglés.</p></div>
+      <div class="day"><div class="d"><i>📝</i>Viernes</div><p>Mini test casero: dictadle seis palabras de la lista; las escribe en inglés y en español, como en clase.</p></div>
+      <div class="day"><div class="d"><i>⭐</i>Fin de semana</div><p>Descanso… o algo en inglés por gusto: una canción, unos dibujos o un juego.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="frases">
+  <div class="wrap">
+    <h2>Frases salvavidas para el Speaking</h2>
+    <p class="kicker">Frases para pedir ayuda y respuestas modelo a preguntas típicas del examinador, ordenadas como en el examen. Pulsad 🔊 para oírla en inglés, y luego que la digan con sus propias cosas: su nombre, su mascota, su comida favorita…</p>
+    <div class="phr-group">
+      <h3>Si no entienden o se bloquean</h3>
+      <ul class="phr">
+        <li data-id="f01"><button class="say" type="button" aria-label="Escuchar">🔊</button><span><span class="en">Sorry, can you say that again, please?</span><span class="es">Perdone, ¿puede repetirlo, por favor?</span></span></li>
+        <li data-id="f02"><button class="say" type="button" aria-label="Escuchar">🔊</button><span><span class="en">Sorry, I don't understand.</span><span class="es">Perdone, no lo entiendo.</span></span></li>
+        <li data-id="f03"><button class="say" type="button" aria-label="Escuchar">🔊</button><span><span class="en">Can you speak more slowly, please?</span><span class="es">¿Puede hablar más despacio, por favor?</span></span></li>
+        <li data-id="f04"><button class="say" type="button" aria-label="Escuchar">🔊</button><span><span class="en">I'm not sure. I think it's a cat.</span><span class="es">No estoy seguro. Creo que es un gato. (mejor intentarlo que callar).</span></span></li>
+      </ul>
+    </div>
+    <div class="phr-group">
+      <h3>Al entrar y al salir</h3>
+      <ul class="phr">
+        <li data-id="f05"><button class="say" type="button" aria-label="Escuchar">🔊</button><span><span class="q">Examinador: «What's your name?»</span><span class="en">My name is Lucía.</span><span class="es">Me llamo Lucía.</span></span></li>
+        <li data-id="f06"><button class="say" type="button" aria-label="Escuchar">🔊</button><span><span class="q">Examinador: «How old are you?»</span><span class="en">I'm eight.</span><span class="es">Tengo ocho años.</span></span></li>
+        <li data-id="f07"><button class="say" type="button" aria-label="Escuchar">🔊</button><span><span class="q">Examinador: «Thank you. Goodbye!»</span><span class="en">Thank you. Goodbye!</span><span class="es">Gracias. ¡Adiós! (despedirse siempre con una sonrisa).</span></span></li>
+      </ul>
+    </div>
+    <div class="phr-group" data-show="starters">
+      <h3>Starters · Señalar en el dibujo grande</h3>
+      <ul class="phr">
+        <li data-id="f08"><button class="say" type="button" aria-label="Escuchar">🔊</button><span><span class="q">Examinador: «Where's the dog?»</span><span class="en">It's here, under the table.</span><span class="es">Está aquí, debajo de la mesa (señalando).</span></span></li>
+        <li data-id="f09"><button class="say" type="button" aria-label="Escuchar">🔊</button><span><span class="q">Examinador: «Where's the ball?»</span><span class="en">It's here, next to the tree.</span><span class="es">Está aquí, al lado del árbol.</span></span></li>
+      </ul>
+    </div>
+    <div class="phr-group" data-show="starters">
+      <h3>Starters · Preguntas sobre el dibujo</h3>
+      <ul class="phr">
+        <li data-id="f10"><button class="say" type="button" aria-label="Escuchar">🔊</button><span><span class="q">Examinador: «What's this?»</span><span class="en">It's a bike.</span><span class="es">Es una bici.</span></span></li>
+        <li data-id="f11"><button class="say" type="button" aria-label="Escuchar">🔊</button><span><span class="q">Examinador: «What colour is the bike?»</span><span class="en">It's red.</span><span class="es">Es roja.</span></span></li>
+        <li data-id="f12"><button class="say" type="button" aria-label="Escuchar">🔊</button><span><span class="q">Examinador: «How many birds are there?»</span><span class="en">There are three birds.</span><span class="es">Hay tres pájaros.</span></span></li>
+        <li data-id="f13"><button class="say" type="button" aria-label="Escuchar">🔊</button><span><span class="q">Examinador: «What's the boy doing?»</span><span class="en">He's running.</span><span class="es">Está corriendo.</span></span></li>
+      </ul>
+    </div>
+    <div class="phr-group" data-show="starters">
+      <h3>Starters · Preguntas sobre ellos</h3>
+      <ul class="phr">
+        <li data-id="f14"><button class="say" type="button" aria-label="Escuchar">🔊</button><span><span class="q">Examinador: «Have you got a pet?»</span><span class="en">Yes, I've got a dog. He's very funny.</span><span class="es">Sí, tengo un perro. Es muy divertido. (Responder y añadir algo más.)</span></span></li>
+        <li data-id="f15"><button class="say" type="button" aria-label="Escuchar">🔊</button><span><span class="q">Examinador: «What's your favourite food?»</span><span class="en">My favourite food is pizza.</span><span class="es">Mi comida favorita es la pizza.</span></span></li>
+        <li data-id="f16"><button class="say" type="button" aria-label="Escuchar">🔊</button><span><span class="q">Examinador: «Do you like football?»</span><span class="en">Yes, I do. I play football with my friends.</span><span class="es">Sí. Juego al fútbol con mis amigos.</span></span></li>
+        <li data-id="f17"><button class="say" type="button" aria-label="Escuchar">🔊</button><span><span class="q">Examinador: «Tell me about your friend.»</span><span class="en">My friend's name is Pablo. He's nine.</span><span class="es">Mi amigo se llama Pablo. Tiene nueve años.</span></span></li>
+      </ul>
+    </div>
+    <div class="phr-group" data-show="movers">
+      <h3>Movers · Encontrar las diferencias</h3>
+      <ul class="phr">
+        <li data-id="f18"><button class="say" type="button" aria-label="Escuchar">🔊</button><span><span class="q">Examinador: «Here the man has got a hat. Here…»</span><span class="en">…he hasn't got a hat.</span><span class="es">Aquí el hombre lleva sombrero. Aquí… no lleva sombrero.</span></span></li>
+        <li data-id="f19"><button class="say" type="button" aria-label="Escuchar">🔊</button><span><span class="q">Examinador: «In this picture there are two cats. In this picture…»</span><span class="en">…there are four cats.</span><span class="es">En este dibujo hay dos gatos. En este… hay cuatro.</span></span></li>
+        <li data-id="f20"><button class="say" type="button" aria-label="Escuchar">🔊</button><span><span class="q">Examinador: «Here the girl is sitting. Here…»</span><span class="en">…she's standing.</span><span class="es">Aquí la niña está sentada. Aquí… está de pie.</span></span></li>
+      </ul>
+    </div>
+    <div class="phr-group" data-show="movers">
+      <h3>Movers · Contar la historia</h3>
+      <ul class="phr">
+        <li data-id="f21"><button class="say" type="button" aria-label="Escuchar">🔊</button><span><span class="q">Examinador: «Look at the pictures. They show a story. Now you tell the story.»</span><span class="en">The boy is sad because he can't find his dog.</span><span class="es">El niño está triste porque no encuentra a su perro.</span></span></li>
+        <li data-id="f22"><button class="say" type="button" aria-label="Escuchar">🔊</button><span><span class="en">Then he looks under the bed, but the dog isn't there.</span><span class="es">Luego mira debajo de la cama, pero el perro no está.</span></span></li>
+        <li data-id="f23"><button class="say" type="button" aria-label="Escuchar">🔊</button><span><span class="en">In the end he finds the dog in the garden. Now he's happy.</span><span class="es">Al final encuentra al perro en el jardín. Ahora está contento.</span></span></li>
+      </ul>
+    </div>
+    <div class="phr-group" data-show="movers">
+      <h3>Movers · El intruso</h3>
+      <ul class="phr">
+        <li data-id="f24"><button class="say" type="button" aria-label="Escuchar">🔊</button><span><span class="q">Examinador: «Which one is different? Why?»</span><span class="en">The banana, because the others are animals.</span><span class="es">El plátano, porque los otros son animales.</span></span></li>
+        <li data-id="f25"><button class="say" type="button" aria-label="Escuchar">🔊</button><span><span class="q">Examinador: «Which one is different? Why?»</span><span class="en">The bus, because you can't wear it.</span><span class="es">El autobús, porque no se puede llevar puesto (los otros son ropa).</span></span></li>
+      </ul>
+    </div>
+    <div class="phr-group" data-show="movers">
+      <h3>Movers · Preguntas sobre ellos</h3>
+      <ul class="phr">
+        <li data-id="f26"><button class="say" type="button" aria-label="Escuchar">🔊</button><span><span class="q">Examinador: «What do you do after school?»</span><span class="en">I go to the park with my friends.</span><span class="es">Voy al parque con mis amigos.</span></span></li>
+        <li data-id="f27"><button class="say" type="button" aria-label="Escuchar">🔊</button><span><span class="q">Examinador: «What do you do at the weekend?»</span><span class="en">On Saturday I play football, and on Sunday I visit my grandma.</span><span class="es">El sábado juego al fútbol y el domingo visito a mi abuela.</span></span></li>
+        <li data-id="f28"><button class="say" type="button" aria-label="Escuchar">🔊</button><span><span class="q">Examinador: «Tell me about your best friend.»</span><span class="en">My best friend is called Marta. She's got long hair and she likes swimming.</span><span class="es">Mi mejor amiga se llama Marta. Tiene el pelo largo y le gusta nadar.</span></span></li>
+        <li data-id="f29"><button class="say" type="button" aria-label="Escuchar">🔊</button><span><span class="q">Examinador: «What's the weather like today?»</span><span class="en">It's sunny and hot.</span><span class="es">Hace sol y calor.</span></span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="enlaces">
+  <div class="wrap">
+    <h2>Recursos oficiales de Cambridge</h2>
+    <p class="kicker">Las páginas de Cambridge University Press &amp; Assessment, en inglés.</p>
+    <ul class="links">
+      <li data-show="starters"><a href="https://www.cambridgeenglish.org/exams-and-tests/qualifications/young-learners/paper/starters/format/" target="_blank" rel="noopener">Formato oficial de Pre A1 Starters</a><span>Cada parte del examen explicada por Cambridge.</span></li>
+      <li data-show="starters"><a href="https://www.cambridgeenglish.org/exams-and-tests/qualifications/young-learners/paper/starters/preparation" target="_blank" rel="noopener">Preparación de Pre A1 Starters</a><span>Exámenes de muestra, listas de vocabulario y actividades.</span></li>
+      <li data-show="movers"><a href="https://www.cambridgeenglish.org/exams-and-tests/qualifications/young-learners/paper/movers/format/" target="_blank" rel="noopener">Formato oficial de A1 Movers</a><span>Cada parte del examen explicada por Cambridge.</span></li>
+      <li data-show="movers"><a href="https://www.cambridgeenglish.org/exams-and-tests/qualifications/young-learners/paper/movers/preparation" target="_blank" rel="noopener">Preparación de A1 Movers</a><span>Exámenes de muestra, listas de vocabulario y actividades.</span></li>
+      <li><a href="https://www.cambridgeenglish.org/for-parents/index.aspx" target="_blank" rel="noopener">Apoyo para familias</a><span>Consejos de Cambridge para acompañar a vuestros hijos.</span></li>
+      <li><a href="https://www.cambridgeenglish.org/learning-english/activities-for-learners/" target="_blank" rel="noopener">Actividades online gratuitas</a><span>Juegos y ejercicios oficiales por nivel.</span></li>
+      <li><a href="https://www.cambridgeenglish.org/Images/461492-young-learners-can-do-statements-.pdf" target="_blank" rel="noopener">Qué sabe hacer un niño en cada nivel</a><span>Los objetivos de Starters, Movers y Flyers (PDF).</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="block faq" id="preguntas">
+  <div class="wrap">
+    <h2>Preguntas frecuentes</h2>
+    <p class="kicker">Las dudas que más me llegan.</p>
+    <details><summary>¿Se puede suspender?</summary><p>No. Todos reciben su certificado. Cada prueba se puntúa de uno a cinco escudos, y cinco escudos significan que han respondido bien a casi todo.</p></details>
+    <details><summary>¿Cuánto dura el examen?</summary>
+      <p data-show="starters">Unos 45 minutos en total: Listening (unos 20 min), Reading and Writing (20 min) y Speaking (de 3 a 5 min).</p>
+      <p data-show="movers">Algo más de una hora en total: Listening (unos 25 min), Reading and Writing (30 min) y Speaking (de 5 a 7 min).</p>
+    </details>
+    <details><summary>¿Estará solo o sola con el examinador en el Speaking?</summary><p>Sí, pero no de golpe. Una persona conocida que habla su idioma, como su maestro, le presenta al examinador y le explica en español qué va a hacer.</p></details>
+    <details><summary>No sé inglés, ¿cómo le ayudo?</summary><p>Con interés y rutina. Los recursos de esta página tienen audio y traducción, así que podéis jugar juntos aunque no habléis inglés. Preguntadle qué ha aprendido y pedidle que os lo enseñe.</p></details>
+    <details><summary>¿Qué pasa si se pone nervioso o nerviosa?</summary><p>Es normal. Por eso en clase practicamos con situaciones de examen reales: para que el día de la prueba todo le resulte familiar. Como dice el propio Cambridge, se trata de disfrutar y aprender pasándolo bien.</p></details>
+    <details><summary>¿Cuándo es el examen?</summary><p>Os comunicaré la fecha y los detalles en cuanto estén confirmados.</p></details>
+    <details><summary>¿Cómo veremos los resultados?</summary><p>En la web de Cambridge, con un usuario y una contraseña que os daremos más adelante. Guardadlos en un lugar seguro: sin ellos no podréis consultar los resultados.</p></details>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><strong>Ignacio Maestro</strong> · Preparación Cambridge, Colegio Santa María</p>
+    <p>Para cualquier duda, escribidme por la app del colegio. Iré añadiendo materiales a esta página a lo largo del curso.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  function speak(text){
+    try{
+      if(!('speechSynthesis' in window)) return;
+      const u=new SpeechSynthesisUtterance(text.replace(/…/g,'.'));
+      u.lang='en-GB'; u.rate=0.85;
+      const v=speechSynthesis.getVoices().find(v=>/en-GB/i.test(v.lang));
+      if(v) u.voice=v;
+      speechSynthesis.cancel(); speechSynthesis.speak(u);
+    }catch(e){}
+  }
+  let cur=null;
+  document.addEventListener('click',e=>{const b=e.target.closest('.say'); if(!b) return; const li=b.closest('li'); const en=b.parentElement.querySelector('.en');
+    if(li && li.dataset.id){ try{ if(cur){cur.pause();cur.currentTime=0;} if('speechSynthesis' in window) speechSynthesis.cancel();
+      cur=new Audio(''+li.dataset.id+'.mp3'); cur.play().catch(()=>{ if(en) speak(en.textContent); }); return; }catch(err){} }
+    if(en) speak(en.textContent);});
+})();
+const EXAMS = {
+  starters:{
+    papers:[
+      {name:"Listening", time:"20", unit:"min aprox.", meta:"4 partes · 20 preguntas", parts:[
+        ["Nombres y personas","Escuchan una conversación y unen cada nombre con la persona del dibujo."],
+        ["Números y deletreo","Escriben un nombre o un número que les deletrean o dicen."],
+        ["Elegir el dibujo","Cinco conversaciones cortas; eligen el dibujo correcto entre tres."],
+        ["Colorear","Colorean objetos de un dibujo siguiendo instrucciones con colores y posiciones."]
+      ], note:"Oyen cada audio dos veces."},
+      {name:"Reading & Writing", time:"20", unit:"min", meta:"5 partes · 25 preguntas", parts:[
+        ["¿Verdadero o falso?","Ponen tic o cruz según si la frase («This is a…») coincide con el dibujo."],
+        ["Yes o no","Leen frases sobre un dibujo grande y escriben yes o no."],
+        ["Ordenar letras","Ordenan letras desordenadas para escribir el nombre de un objeto."],
+        ["Completar un texto","Copian la palabra correcta en cada hueco de un texto corto."],
+        ["Historia en dibujos","Responden con una sola palabra a preguntas sobre tres viñetas."]
+      ], note:"Las respuestas tienen que estar bien escritas."},
+      {name:"Speaking", time:"3–5", unit:"min", meta:"4 partes · a solas con el examinador", parts:[
+        ["Señalar y colocar","Señalan cosas en un dibujo grande y colocan tarjetas donde se les pide."],
+        ["Preguntas sobre el dibujo","«What is this?», «What colour is it?» y «Tell me about…»."],
+        ["Preguntas sobre las tarjetas","Preguntas sencillas sobre los objetos, como «Have you got a…?»."],
+        ["Sobre ellos mismos","Edad, familia, amigos…"]
+      ], note:"Un maestro conocido les presenta al examinador."}
+    ]
+  },
+  movers:{
+    papers:[
+      {name:"Listening", time:"25", unit:"min aprox.", meta:"5 partes · 25 preguntas", parts:[
+        ["Nombres y personas","Unen cada nombre con la persona correcta del dibujo."],
+        ["Completar una ficha","Escriben palabras o números que faltan en un formulario."],
+        ["Emparejar dibujos","Relacionan dibujos de dos columnas según lo que escuchan."],
+        ["Elegir el dibujo","Cinco conversaciones cortas; marcan el dibujo correcto entre tres."],
+        ["Colorear y escribir","Colorean partes de un dibujo y escriben una palabra sencilla."]
+      ], note:"Oyen cada audio dos veces."},
+      {name:"Reading & Writing", time:"30", unit:"min", meta:"6 partes · 35 preguntas", parts:[
+        ["Definiciones","Leen definiciones y copian la palabra que corresponde."],
+        ["Diálogo","Eligen qué responde la segunda persona en una conversación (A, B o C)."],
+        ["Texto con huecos","Completan un texto con palabras y eligen el mejor título."],
+        ["Texto informativo","Eligen entre tres palabras la que encaja en cada hueco."],
+        ["Una historia","Completan frases de un cuento con una, dos o tres palabras."],
+        ["Escribir sobre un dibujo","Completan frases, responden preguntas y escriben frases completas."]
+      ], note:"Las respuestas tienen que estar bien escritas."},
+      {name:"Speaking", time:"5–7", unit:"min", meta:"4 partes · a solas con el examinador", parts:[
+        ["Diferencias","Describen cuatro diferencias entre dos dibujos parecidos."],
+        ["Contar una historia","Continúan una historia de cuatro viñetas a partir de la primera."],
+        ["El intruso","En cuatro grupos de dibujos, dicen cuál es distinto y por qué."],
+        ["Sobre ellos mismos","Colegio, fines de semana, amigos, aficiones…"]
+      ], note:"Un maestro conocido les presenta al examinador."}
+    ]
+  }
+};
+
+const SHIELD = '<svg viewBox="0 0 100 120" aria-hidden="true" preserveAspectRatio="none"><path d="M50 2 L96 16 C96 64 82 96 50 118 C18 96 4 64 4 16 Z"/></svg>';
+
+const SHOTS = {
+  starters:[
+    {shots:[["s-l-1","Parte 1 · Unir nombres y personas"],["s-l-2","Parte 2 · Escribir un nombre o un número"],["s-l-2b","Parte 2 · Escribir un nombre o un número (sigue)"],["s-l-3","Parte 3 · Elegir el dibujo"],["s-l-3b","Parte 3 · Elegir el dibujo (sigue)"],["s-l-4","Parte 4 · Colorear"]], audio:"https://www.cambridgeenglish.org/starters-audio-sample-v1"},
+    {shots:[["s-rw-1","Parte 1 · ¿Verdadero o falso?"],["s-rw-1b","Parte 1 · ¿Verdadero o falso? (sigue)"],["s-rw-2","Parte 2 · Yes o no"],["s-rw-3","Parte 3 · Ordenar letras"],["s-rw-4","Parte 4 · Completar un texto"],["s-rw-5","Parte 5 · Historia en dibujos"],["s-rw-5b","Parte 5 · Historia en dibujos (sigue)"]]},
+    {shots:[["s-s-1","Partes 1 y 2 · El dibujo grande",1],["s-s-2","Partes 1 y 3 · Las tarjetas de objetos"]]}
+  ],
+  movers:[
+    {shots:[["m-l-1","Parte 1 · Unir nombres y personas"],["m-l-2","Parte 2 · Completar una ficha"],["m-l-3","Parte 3 · Emparejar dibujos"],["m-l-3b","Parte 3 · Emparejar dibujos (sigue)"],["m-l-4","Parte 4 · Elegir el dibujo"],["m-l-4b","Parte 4 · Elegir el dibujo (sigue)"],["m-l-5","Parte 5 · Colorear y escribir"]], audio:"https://www.cambridgeenglish.org/movers-audio-sample-v1"},
+    {shots:[["m-rw-1","Parte 1 · Definiciones"],["m-rw-1b","Parte 1 · Definiciones (sigue)"],["m-rw-2","Parte 2 · Diálogo"],["m-rw-2b","Parte 2 · Diálogo (sigue)"],["m-rw-3","Parte 3 · Texto con huecos"],["m-rw-3b","Parte 3 · Texto con huecos (sigue)"],["m-rw-4","Parte 4 · Texto informativo"],["m-rw-4b","Parte 4 · Texto informativo (sigue)"],["m-rw-5","Parte 5 · Una historia"],["m-rw-5b","Parte 5 · Una historia (sigue)"],["m-rw-5c","Parte 5 · Una historia (sigue)"],["m-rw-6","Parte 6 · Escribir sobre un dibujo"],["m-rw-6b","Parte 6 · Escribir sobre un dibujo (sigue)"]]},
+    {shots:[["m-s-1","Parte 1 · Las diferencias",1],["m-s-2","Parte 2 · La historia de cuatro viñetas",1],["m-s-3","Parte 3 · El intruso",1]]}
+  ]
+};
+function sampleHTML(level,i){
+  const p=(SHOTS[level]||[])[i]; if(!p) return "";
+  const figs=p.shots.map(([f,c,w])=>`<figure${w?' class="wide"':''}><a href="${f}.jpg" target="_blank" rel="noopener"><img src="${f}.jpg" alt="${c}" loading="lazy"></a><figcaption>${c}</figcaption></figure>`).join("");
+  const audio=p.audio?` · <a href="${p.audio}" target="_blank" rel="noopener">Escuchar los audios</a>`:"";
+  return `<div class="sample"><h4>Así es el examen de muestra</h4><div class="car">${figs}</div><p class="hint">Desliza para ver todas las partes; pulsa una imagen para verla en grande${audio}. Examen de muestra oficial de Cambridge (Sample papers 2018, vol. 1) © UCLES.</p></div>`;
+}
+
+function render(level){
+  const d = EXAMS[level];
+  document.getElementById("shields").innerHTML = d.papers.map(p =>
+    `<div class="shield">${SHIELD}<span class="skill">${p.name}</span><span class="time">${p.time}</span><span class="meta">${p.unit}</span></div>`
+  ).join("");
+  document.getElementById("papers").innerHTML = d.papers.map((p,i) =>
+    `<details class="paper"${i===0?" open":""}><summary><h3>${p.name}</h3><span class="tag">${p.time} ${p.unit} · ${p.meta}</span></summary>
+     <ol class="parts">${p.parts.map(([t,s])=>`<li><div><b>${t}</b><span>${s}</span></div></li>`).join("")}</ol>
+     <p style="padding:0 20px 16px;margin:0;color:var(--muted);font-size:.95rem">${p.note}</p>${sampleHTML(level,i)}</details>`
+  ).join("");
+}
+
+function setLevel(level){
+  document.body.dataset.level = level;
+  document.querySelectorAll(".switch button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.level===level)));
+  render(level);
+  try{ localStorage.setItem("cambridge-level", level); }catch(e){}
+}
+
+document.querySelectorAll(".switch button").forEach(b => b.addEventListener("click", () => setLevel(b.dataset.level)));
+
+let saved = null;
+try{ saved = localStorage.getItem("cambridge-level"); }catch(e){}
+const fromHash = location.hash === "#movers" ? "movers" : location.hash === "#starters" ? "starters" : null;
+setLevel(fromHash || (saved === "movers" ? "movers" : "starters"));
+</script>
+</body>
+</html>
